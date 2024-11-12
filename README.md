@@ -5,10 +5,10 @@ Proyek ini bertujuan untuk [deskripsi singkat proyek, misalnya "membuat aplikasi
 
 ## 👥 Anggota Kelompok
 1. Fauzan Azima
-2. Muhammad Mukhlis
-3. [Nama Anggota 3]
-4. [Nama Anggota 4]
-5. [Nama Anggota 5]
+2. Mukhlis Khoirudin
+3. Yeni Suryani
+4. Syilvana Efendi
+5. Agus Milani
 
 ## 📦 Teknologi yang Digunakan
 - HTML, CSS, JavaScript
