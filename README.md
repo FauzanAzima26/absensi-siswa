@@ -3,7 +3,7 @@
 <h2>Aplikasi Absensi Siswa Berbasis Web</h2><br>
 
 <h2>📄 Deskripsi Proyek</h2>
-Proyek ini bertujuan untuk "membuat aplikasi Absensi Siswa berbasis web".
+Proyek ini bertujuan sebagai proyek akhir SIB SOMEAH.
 
 <br>
 
