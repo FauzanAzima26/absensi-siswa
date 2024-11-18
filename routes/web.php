@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\KelasController;
 use App\Http\Controllers\Backend\RekapController;
 use App\Http\Controllers\Backend\SiswaController;
 use App\Http\Controllers\Backend\AbsensiController;
+use App\Http\Controllers\Backend\ProfileGuruController;
 use App\Http\Controllers\Backend\InformasiPribadiController;
 
 
@@ -26,7 +27,7 @@ Route::resource('guru',GuruController::class);
 Route::resource('siswa',SiswaController::class);
 Route::resource('absensi',AbsensiController::class);
 Route::resource('rekap',RekapController::class);
-Route::resource('informasi',InformasiPribadiController::class);
+Route::resource('profile_guru',ProfileGuruController::class);
 
 
 

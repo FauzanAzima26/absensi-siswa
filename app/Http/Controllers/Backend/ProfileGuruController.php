@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class InformasiPribadiController extends Controller
+class ProfileGuruController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('backend.profile guru.informasi.index');
+        return view('backend.profile_guru.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class InformasiPribadiController extends Controller
      */
     public function create()
     {
-        return view('backend.profile guru.informasi.create');
+        return view('backend.profile_guru.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class InformasiPribadiController extends Controller
      */
     public function show(string $uuid)
     {
-        return view('backend.profile guru.informasi.show');
+        return view('backend.profile_guru.show');
     }
 
     /**
@@ -44,7 +44,7 @@ class InformasiPribadiController extends Controller
      */
     public function edit(string $uuid)
     {
-        return view('backend.profile guru.informasi.edit');
+        return view('backend.profile_guru.edit');
     }
 
     /**

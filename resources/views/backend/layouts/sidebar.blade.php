@@ -91,20 +91,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#submenu">
+                    <a href="/profile_guru">
                         <i class="fas fa-user"></i>
                         <p>Profile Guru</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="submenu">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="/informasi">
-                                    <span class="sub-item">Informasi Pribadi</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
