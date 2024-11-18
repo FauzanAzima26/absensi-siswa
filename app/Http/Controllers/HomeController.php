@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Backend\guru;
 use Illuminate\Http\Request;
+use App\Models\Backend\Kelas;
+use App\Models\Backend\siswa;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $kelas = Kelas::all();
+        // $guru = guru::all();
+        // $siswa = siswa::all();
+        // return view('backend.dashboard.index', compact('kelas', 'guru', 'siswa'));
+        return view('backend.dashboard.index');
     }
 }
