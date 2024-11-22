@@ -44,25 +44,26 @@
                     </span>
                     <h4 class="text-section">Menu Pengguna</h4>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#base">
+                <li class="nav-item {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? 'show' : '' }}">
+                    <a data-bs-toggle="collapse" href="#base"
+                       class="{{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? '' : 'collapsed' }}">
                         <i class="fas fa-layer-group"></i>
                         <p>Data Umum</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="base">
+                    <div class="collapse {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? 'show' : '' }}" id="base">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="nav-item {{ request()->routeIs('kelas.*') ? 'active' : '' }}">
                                 <a href="/kelas">
                                     <span class="sub-item">Daftar Kelas</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="nav-item {{ request()->routeIs('guru.*') ? 'active' : '' }}">
                                 <a href="/guru">
                                     <span class="sub-item">Daftar Guru</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="nav-item {{ request()->routeIs('siswa.*') ? 'active' : '' }}">
                                 <a href="/siswa">
                                     <span class="sub-item">Daftar Siswa</span>
                                 </a>
@@ -70,6 +71,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tables">
                         <i class="fas fa-check-circle"></i>
