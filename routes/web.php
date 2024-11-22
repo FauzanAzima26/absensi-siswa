@@ -1,13 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\GuruController;
-use App\Http\Controllers\Backend\KelasController;
 use App\Http\Controllers\Backend\RekapController;
 use App\Http\Controllers\Backend\SiswaController;
+use App\Http\Controllers\Backend\KelasController;
+use App\Http\Controllers\Backend\GuruController;
 use App\Http\Controllers\Backend\AbsensiController;
 use App\Http\Controllers\Backend\ProfileGuruController;
 use App\Http\Controllers\Backend\InformasiPribadiController;
+
+
+Route::resource('guru', GuruController::class);
+Route::resource('kelas', KelasController::class);
 
 
 Route::get('/', function () {
@@ -19,7 +23,7 @@ Route::get('home', function () {
 });
 
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('kelas',KelasController::class);
