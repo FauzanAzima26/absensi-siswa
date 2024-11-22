@@ -26,7 +26,7 @@ const modalShowcase = `
 			  </button>
 			</div>
 			<div class="modal-body px-md-5">
-				<div class="row g-5 pb-5"> 
+				<div class="row g-5 pb-5">
 					<div class="col-md-6 col-lg-4">
 						<div class="card-documentation h-100">
 							<div class="d-flex align-items-center flex-column justify-content-center text-center">
@@ -44,7 +44,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo1/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Classic Dashboard	
+									Classic Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -57,7 +57,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo2/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									White Classic Dashboard	
+									White Classic Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -70,7 +70,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo3/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Dark Dashboard	
+									Dark Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -83,7 +83,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo4/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Creative Dashboard	
+									Creative Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -96,7 +96,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo5/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Trendy Dashboard	
+									Trendy Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -109,7 +109,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo6/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Trendy 2 Dashboard	
+									Trendy 2 Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -122,7 +122,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo7/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Horizontal Dashboard	
+									Horizontal Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -135,7 +135,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo8/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Enterprise Dashboard	
+									Enterprise Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -148,7 +148,7 @@ const modalShowcase = `
 						<div class="preview-showcase shadow-sm">
 							<a href="../demo9/index.html" data-kt-href="true" class="preview-thumbnail">
 								<h3 class="preview-title">
-									Futuristic Dashboard	
+									Futuristic Dashboard
 								</h3>
 
 								<div class="overflow-hidden">
@@ -189,19 +189,19 @@ Circles.create({
 	styleText:    true
 })
 
-//Notify
-$.notify({
-	icon: 'icon-bell',
-	title: 'Kaiadmin',
-	message: 'Premium Bootstrap 5 Admin Dashboard',
-},{
-	type: 'secondary',
-	placement: {
-		from: "bottom",
-		align: "right"
-	},
-	time: 1000,
-});
+// //Notify
+// $.notify({
+// 	icon: 'icon-bell',
+// 	title: 'Kaiadmin',
+// 	message: 'Premium Bootstrap 5 Admin Dashboard',
+// },{
+// 	type: 'secondary',
+// 	placement: {
+// 		from: "bottom",
+// 		align: "right"
+// 	},
+// 	time: 1000,
+// });
 
 // Jsvectormap
 var world_map = new jsVectorMap({
@@ -306,7 +306,7 @@ var statisticsChart = new Chart(ctx, {
 		}]
 	},
 	options : {
-		responsive: true, 
+		responsive: true,
 		maintainAspectRatio: false,
 		legend: {
 			display: false
@@ -345,20 +345,20 @@ var statisticsChart = new Chart(ctx, {
 					fontStyle: "500"
 				}
 			}]
-		}, 
-		legendCallback: function(chart) { 
-			var text = []; 
-			text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-			for (var i = 0; i < chart.data.datasets.length; i++) { 
-				text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-				if (chart.data.datasets[i].label) { 
-					text.push(chart.data.datasets[i].label); 
-				} 
-				text.push('</li>'); 
-			} 
-			text.push('</ul>'); 
-			return text.join(''); 
-		}  
+		},
+		legendCallback: function(chart) {
+			var text = [];
+			text.push('<ul class="' + chart.id + '-legend html-legend">');
+			for (var i = 0; i < chart.data.datasets.length; i++) {
+				text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+				if (chart.data.datasets[i].label) {
+					text.push(chart.data.datasets[i].label);
+				}
+				text.push('</li>');
+			}
+			text.push('</ul>');
+			return text.join('');
+		}
 	}
 });
 

@@ -24,10 +24,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('kelas',KelasController::class);
 Route::resource('guru',GuruController::class);
-Route::resource('siswa',SiswaController::class);
+
 Route::resource('absensi',AbsensiController::class);
 Route::resource('rekap',RekapController::class);
 Route::resource('profile_guru',ProfileGuruController::class);
 
+// siswa
+Route::resource('siswa',SiswaController::class)->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy', 'show'
+]);
 
 

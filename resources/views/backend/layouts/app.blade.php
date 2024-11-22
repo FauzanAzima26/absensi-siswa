@@ -7,6 +7,8 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
+     <!-- CSRF Token -->
+     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link
       rel="icon"
       href="{{ asset('/assets/backend/img/kaiadmin/favicon.ico') }}"
@@ -36,9 +38,11 @@
     <link rel="stylesheet" href="{{ asset('assets/backend/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/backend/css/kaiadmin.min.css') }}" />
+ 
+
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{ asset('assets/backend/assets/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/css/demo.css') }}" />
   </head>
   <body>
     <div class="wrapper">
@@ -83,7 +87,7 @@
         </div>
 
         <footer class="footer">
-          
+
             <div class="copyright text-center">
               2024 | Copy right <i class="fa fa-copyright"></i> by
               <a href="http://www.themekita.com">KELOMPOK 4</a>
@@ -112,6 +116,8 @@
 
     <!-- Datatables -->
     <script src="{{ asset('assets/backend/js/plugin/datatables/datatables.min.js') }}"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script> --}}
 
     <!-- Bootstrap Notify -->
     <script src="{{ asset('assets/backend/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
@@ -157,6 +163,8 @@
         fillColor: "rgba(255, 165, 52, .14)",
       });
     </script>
+
+    @stack('js')
   </body>
 </html>
 
