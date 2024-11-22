@@ -11,5 +11,7 @@ class Kelas extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_kelas'];
+    protected $fillable = ['name_kelas', 'wali_kelas', 'jumlah_siswa'];
+
 }
+

@@ -1,5 +1,10 @@
-
 @extends('layouts.app')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 
 @section('content')
     <h1>Daftar Kelas</h1>
@@ -20,7 +25,7 @@
                         <form action="{{ route('kelas.destroy', $k->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
                     </td>
                 </tr>
