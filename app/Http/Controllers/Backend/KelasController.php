@@ -4,62 +4,79 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kelas;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view('backend.data umum.kelas.index');
+        $kelas = Kelas::all();
+
+        return view('backend.data umum.kelas.index', compact('kelas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.data umum.kelas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'wali_kelas' => 'required|string|max:255',
+            'jumlah_siswa' => 'required|string|max:255',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $uuid)
+        Kelas::create([
+            'name_kelas' => $request->name,
+            'wali_kelas' => $request->wali_kelas,
+            'jumlah_siswa' => $request->jumlah_siswa,
+        ]);
+
+        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil ditambahkan!');
+    }
+    public function show(string $id)
     {
         return view('backend.data umum.kelas.show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $uuid)
+    public function edit(string $id)
     {
-        return view('backend.data umum.kelas.edit');
+        $kelas = Kelas::where('id', $id)->firstOrFail();
+    
+        return view('backend.data umum.kelas.edit', compact('kelas'));
     }
+    
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name_kelas' => 'required|string|max:255',
+            'wali_kelas' => 'required|string|max:255',
+            'jumlah_siswa' => 'required|string|max:255',
+        ]);
+    
+        $kelas = Kelas::findOrFail($id);
+    
+        $kelas->update([
+            'name_kelas' => $request->name_kelas,
+            'wali_kelas' => $request->wali_kelas,
+            'jumlah_siswa' => $request->jumlah_siswa,
+        ]);
+    
+        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil diperbarui!');
     }
+    
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+        $kelas->delete();
+
+        return redirect()->route('kelas.index')->with('success', 'Kelas berhasil dihapus!');
     }
+
+    
 }
