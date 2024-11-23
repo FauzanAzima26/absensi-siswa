@@ -39,7 +39,7 @@ class SiswaService
     {
         $query = Siswa::orderBy('class_id')
         ->orderBy('name')
-        ->select(['uuid', 'name', 'class_id', 'nisn']);
+        ->select(['uuid', 'name', 'class_id', 'date_of_birth', 'address', 'nisn']);
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%")

@@ -58,6 +58,8 @@
                                     <th>Nama</th>
                                     <th>NISN</th>
                                     <th>Kelas</th>
+                                    <th>Tanggal Lahir</th>
+                                    <th>Alamat</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -68,6 +70,8 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->nisn }}</td>
                                     <td>{{ $item->class->name_kelas ?? '-' }}</td>
+                                    <td>{{ $item->date_of_birth }}</td>
+                                    <td>{{ $item->address }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ route('siswa.show', $item->uuid) }}" class="btn btn-sm btn-warning">
