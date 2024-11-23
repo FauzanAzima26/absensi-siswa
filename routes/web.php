@@ -41,6 +41,7 @@ Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.updat
 // create
 Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
 Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+
 // siswa
 Route::resource('siswa',SiswaController::class)->only([
     'index', 'create', 'store', 'edit', 'update', 'destroy', 'show'
