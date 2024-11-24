@@ -47,15 +47,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="kelas">Kelas</label>
-                                    <input type="text"
-                                           class="form-control @error('kelas') is-invalid @enderror"
-                                           id="kelas"
-                                           name="kelas"
-                                           placeholder="Enter Kelas"
-                                           value="{{ old('kelas') }}"
-                                           required>
-                                    @error('kelas')
+                                    <label for="status">Status Siswa</label>
+                                    <select class="form-control @error('status') is-invalid @enderror"
+                                            id="status"
+                                            name="status"
+                                            required>
+                                        <option value="">Pilih Status Siswa</option>
+                                        <option value="Aktif" {{ old('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                        <option value="Tidak Aktif" {{ old('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                    </select>
+                                    @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -110,5 +111,6 @@
     </div>
 </div>
 @endsection
+
 
 

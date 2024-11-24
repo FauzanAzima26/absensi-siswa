@@ -40,7 +40,7 @@
                           <tr>
                             <th>No</th>
                             <th>Nama Siswa</th>
-                            <th>Kelas</th>
+                            <th>Status</th>
                             <th>Tanggal</th>
                             <th>Keterangan</th>
                             <th>Action</th>
