@@ -41,7 +41,10 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>NIP</th>
-                                    <th>Guru Pengampu</th>
+                                    <th>Alamat</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

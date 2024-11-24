@@ -68,23 +68,72 @@
                                 </div>
                             </div>
 
-                            <!-- Input Mata Pelajaran -->
+                            <!-- Input Alamat -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="matpel">Guru Pengampu</label>
+                                    <label for="alamat">Alamat</label>
                                     <input type="text" 
-                                           class="form-control @error('guru pengampu') is-invalid @enderror" 
-                                           id="matpel" 
-                                           name="matpel" 
-                                           placeholder="Enter guru pengampu" 
-                                           value="{{ old('guru pengampu') }}" 
+                                           class="form-control @error('alamat') is-invalid @enderror" 
+                                           id="alamat" 
+                                           name="alamat" 
+                                           placeholder="Enter alamat" 
+                                           value="{{ old('alamat') }}" 
                                            required>
-                                    @error('guru pengampu')
+                                    @error('alamat')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
 
+                             <!-- Input Phone -->
+                             <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" 
+                                           class="form-control @error('phone') is-invalid @enderror" 
+                                           id="phone" 
+                                           name="phone" 
+                                           placeholder="Enter phone" 
+                                           value="{{ old('phone') }}" 
+                                           required>
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                             <!-- Input Email -->
+                             <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" 
+                                           class="form-control @error('email') is-invalid @enderror" 
+                                           id="email" 
+                                           name="email" 
+                                           placeholder="Enter email" 
+                                           value="{{ old('email') }}" 
+                                           required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                            <!-- Input Image -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input type="file" 
+                                           class="form-control @error('image') is-invalid @enderror" 
+                                           id="image" 
+                                           name="image" 
+                                           accept="image/*" 
+                                           required>
+                                    @error('image')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-action">
