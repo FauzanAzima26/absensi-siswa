@@ -11,24 +11,30 @@ use App\Http\Controllers\Backend\ProfileGuruController;
 use App\Http\Controllers\Backend\InformasiPribadiController;
 
 
+// Route::get('home', function () {
+//     return view('backend.dashboard.index');
+// });
 
+//new
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('home', function () {
-    return view('backend.dashboard.index');
+Route::prefix('panel')->middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('backend.dashboard.index');
+    })->name('panel.dashboard');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('kelas',KelasController::class);
-Route::resource('guru',GuruController::class);
+Route::resource('kelas', KelasController::class);
+Route::resource('guru', GuruController::class);
 
-Route::resource('absensi',AbsensiController::class);
-Route::resource('rekap',RekapController::class);
-Route::resource('profile_guru',ProfileGuruController::class);
+Route::resource('absensi', AbsensiController::class);
+Route::resource('rekap', RekapController::class);
+Route::resource('profile_guru', ProfileGuruController::class);
 
 Route::delete('kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 
@@ -43,8 +49,12 @@ Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.cre
 Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
 
 // siswa
-Route::resource('siswa',SiswaController::class)->only([
-    'index', 'create', 'store', 'edit', 'update', 'destroy', 'show'
+Route::resource('siswa', SiswaController::class)->only([
+    'index',
+    'create',
+    'store',
+    'edit',
+    'update',
+    'destroy',
+    'show'
 ]);
-
-
