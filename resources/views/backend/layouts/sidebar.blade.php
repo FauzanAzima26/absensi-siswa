@@ -84,19 +84,9 @@
                                 <a href="/absensi">
                                     <span class="sub-item">Data Absensi</span>
                                 </a>
-                            </li><li>
-                                <a href="/rekap">
-                                    <span class="sub-item">Rekap Absensi</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a href="/profile_guru">
-                        <i class="fas fa-user"></i>
-                        <p>Profile Guru</p>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
