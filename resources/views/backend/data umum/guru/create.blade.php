@@ -37,12 +37,12 @@
                             <!-- Input Nama Guru -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="name">Nama Guru</label>
+                                    <label for="name">Nama</label>
                                     <input type="text" 
                                            class="form-control @error('name') is-invalid @enderror" 
                                            id="name" 
                                            name="name" 
-                                           placeholder="Enter nama guru" 
+                                           placeholder="Enter nama" 
                                            value="{{ old('name') }}" 
                                            required>
                                     @error('name')
