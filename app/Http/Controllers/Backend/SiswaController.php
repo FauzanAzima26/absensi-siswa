@@ -15,7 +15,9 @@ class SiswaController extends Controller
     public function __construct(
         private ClassService $classService,
         private SiswaService $siswaService
-    ) {}
+    ) {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      */

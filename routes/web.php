@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\KelasController;
 use App\Http\Controllers\Backend\RekapController;
 use App\Http\Controllers\Backend\SiswaController;
 use App\Http\Controllers\Backend\AbsensiController;
+use App\Http\Controllers\Backend\dashboardController;
 use App\Http\Controllers\Backend\ProfileGuruController;
 use App\Http\Controllers\Backend\InformasiPribadiController;
 
@@ -21,20 +22,15 @@ Route::get('/', function () {
 });
 
 Route::prefix('panel')->middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard.index');
-    })->name('panel.dashboard');
+    Route::resource('dashboard', dashboardController::class)->names('panel.dashboard');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('kelas', KelasController::class);
 Route::resource('guru', GuruController::class);
 
 Route::resource('absensi', AbsensiController::class);
-Route::resource('rekap', RekapController::class);
-Route::resource('profile_guru', ProfileGuruController::class);
 
 Route::delete('kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 

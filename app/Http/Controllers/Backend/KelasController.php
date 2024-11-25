@@ -8,6 +8,10 @@ use App\Models\Backend\Kelas;
 
 class KelasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     public function index()
     {
