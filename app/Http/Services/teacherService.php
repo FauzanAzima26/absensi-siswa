@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Backend\Teacher;
+use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
 class teacherService
@@ -31,6 +32,11 @@ class teacherService
             $totalFiltered = $data->count();
         }
 
+        // Menambahkan URL gambar
+        foreach ($data as $teacher) {
+            $teacher->image = url('storage/images/' . $teacher->image); // Menghasilkan URL gambar
+        }
+
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn =
@@ -57,4 +63,39 @@ class teacherService
             ->addIndexColumn()
             ->make(true);
     }
+
+
+    public function createUser($data)
+    {
+        // Hanya ambil data yang diperlukan untuk User
+        $userData = [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ];
+
+        return User::create($userData);
+    }
+
+    public function create($data)
+    {
+        // Hanya ambil data yang diperlukan untuk Teacher
+        $teacherData = [
+            'user_id' => $data['user_id'], // ID User yang baru dibuat
+            'image' => $data['image'],
+            'nip' => $data['nip'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+        ];
+
+        return Teacher::create($teacherData);
+    }
+
+    public function getUser()
+    {
+        return User::latest()->get(['id', 'name']);
+    }
+
 }

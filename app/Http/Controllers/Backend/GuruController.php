@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Services\imageService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\teacherRequest;
 use App\Http\Services\teacherService;
 
 class GuruController extends Controller
 {
     public function __construct(
-        private teacherService $teacherService
+        private teacherService $teacherService,
+        private imageService $imageService
     )
     {
         $this->middleware('admin');
@@ -26,10 +29,29 @@ class GuruController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        
-    }
+    public function store(TeacherRequest $request)
+{
+    $data = $request->validated();
+
+    try {
+        // Simpan gambar dan dapatkan path
+        $data['image'] = $this->imageService->storeImage($data);
+
+        // Buat User dan ambil ID yang baru dibuat
+        $user = $this->teacherService->createUser ($data);
+
+        // Buat Teacher dengan user_id yang baru dibuat
+        $this->teacherService->create(array_merge($data, ['user_id' => $user->id]));
+
+        return response()->json(['message' => 'Data guru has been created successfully!']);
+    } catch (\Exception $e) {
+        // Hapus gambar jika terjadi kesalahan
+        if (isset($data['image'])) {
+            $this->imageService->deleteImage($data['image'], 'images');
+        }
+        return response()->json(['message' => $e->getMessage()], 500);
+    }   
+}
 
 
     public function show(string $uuid)

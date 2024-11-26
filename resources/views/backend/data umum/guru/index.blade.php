@@ -10,11 +10,16 @@
 @endpush
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="{{asset('assets/backend/js/helper.js')}}"></script>
     <script src="{{asset('assets/backend/js/teacher.js')}}"></script>
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\teacherRequest') !!}
 @endpush
 
 <div class="page-inner">
@@ -42,9 +47,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center">
                     <div class="card-title">Daftar Guru</div>
-                    <a href="#" class="btn btn-success btn-sm ms-auto">
-                        <i class="fa fa-plus"></i> Add Guru
-                    </a>
+                    <button class="btn btn-success ms-auto" onclick="modal(this)">Create</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -62,7 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -72,4 +75,5 @@
     </div>
 </div>
 
+@include('backend.data umum.guru._modal')
 @endsection

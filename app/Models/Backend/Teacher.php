@@ -19,7 +19,7 @@ class Teacher extends Model
         'email',
         'phone',
         'address',
-        'photo'
+        'image'
     ];
 
     public function user()
