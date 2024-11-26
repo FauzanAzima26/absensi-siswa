@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Services\teacherService;
 
 class GuruController extends Controller
 {
-    public function __construct()
+    public function __construct(
+        private teacherService $teacherService
+    )
     {
         $this->middleware('admin');
     }
@@ -25,27 +28,32 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        return view('backend.data umum.guru.store');
+        
     }
 
 
     public function show(string $uuid)
     {
-        return view('backend.data umum.guru.show');
+        
     }
 
     public function edit(string $uuid)
     {
-        return view('backend.data umum.guru.edit');
+        
     }
 
     public function update(Request $request, string $id)
     {
-        return view('backend.data umum.guru.update');
+        
     }
 
     public function destroy(string $id)
     {
-        return view('backend.data umum.guru.destroy');
+        
+    }
+
+    public function getData()
+    {
+        return $this->teacherService->serverSide();
     }
 }

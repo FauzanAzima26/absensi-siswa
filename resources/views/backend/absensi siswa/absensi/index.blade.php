@@ -29,9 +29,11 @@
                 <div class="card">
                   <div class="card-header d-flex align-items-center">
                     <div class="card-title">Data Absensi</div>
+                    @if (Auth::user()->role !== 'admin')
                     <a href="{{ route('absensi.create') }}" class="btn btn-success btn-sm ms-auto">
                         <i class="fa fa-plus"></i> Add Absen
                     </a>
+                    @endif
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">

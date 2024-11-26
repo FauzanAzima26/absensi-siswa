@@ -23,12 +23,15 @@ Route::get('/', function () {
 
 Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('dashboard', dashboardController::class)->names('panel.dashboard');
+
+    // Guru
+    Route::resource('guru', GuruController::class)->names('panel.guru');
+    Route::get('guru-serverside', [GuruController::class, 'getData'])->name('panel.guru.serverside');
 });
 
 Auth::routes();
 
 Route::resource('kelas', KelasController::class);
-Route::resource('guru', GuruController::class);
 
 Route::resource('absensi', AbsensiController::class);
 

@@ -5,19 +5,17 @@
 @section('content')
 
 @push('css')
-<link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> 
-<link rel="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
 @endpush
 
 @push('js')
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
-<script>
-    $('#example').DataTable();
-</script>
-@endpush   
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="{{asset('assets/backend/js/teacher.js')}}"></script>
+@endpush
 
 <div class="page-inner">
     <div class="page-header">
@@ -44,13 +42,13 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center">
                     <div class="card-title">Daftar Guru</div>
-                    <a href="{{ route('guru.create') }}" class="btn btn-success btn-sm ms-auto">
+                    <a href="#" class="btn btn-success btn-sm ms-auto">
                         <i class="fa fa-plus"></i> Add Guru
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table  id="example" class="table table-striped" style="width:100%">
+                        <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -64,7 +62,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                             
                             </tbody>
                         </table>
                     </div>
@@ -75,4 +73,3 @@
 </div>
 
 @endsection
-

@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item {{ request()->routeIs('guru.*') ? 'active' : '' }}">
-                                        <a href="/guru">
+                                        <a href="{{route('panel.guru.index')}}">
                                             <span class="sub-item">Daftar Guru</span>
                                         </a>
                                     </li>
