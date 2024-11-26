@@ -7,7 +7,6 @@
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('/assets/backend/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
     <!-- Fonts and icons -->
     <script src="{{ asset('/assets/backend/js/plugin/webfont/webfont.min.js') }}"></script>
     <script>
@@ -39,6 +38,8 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/backend/css/demo.css') }}" />
+
+    @stack('css')
 </head>
 
 <body>
