@@ -57,3 +57,9 @@ Route::resource('siswa', SiswaController::class)->only([
     'destroy',
     'show'
 ]);
+
+Route::get('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+Route::get('/siswa/{classId}', [AbsensiController::class, 'getSiswaByKelas']);
+Route::get('/siswa/{kelasId}', [AbsensiController::class, 'getSiswaByKelas']);
+Route::get('/kelas/{kelasId}/siswa', [AbsensiController::class, 'getSiswaByKelas']);

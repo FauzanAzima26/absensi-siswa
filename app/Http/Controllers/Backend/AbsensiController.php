@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Backend\Kelas;
+use App\Models\Backend\absensi;
+use App\Http\Controllers\Controller;
+use App\Models\Backend\siswa;
 
 class AbsensiController extends Controller
 {
@@ -20,7 +24,9 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        return view('backend.absensi siswa.absensi.create');
+        $kelas = Kelas::all();
+        // dd($kelas);
+        return view('backend.absensi siswa.absensi.create', compact('kelas'));
     }
 
     /**
@@ -28,7 +34,26 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kelas_id' => 'required|exists:kelas,id',
+            'tanggal' => 'required|date',
+            'students' => 'required|array',
+            'students.*.status' => 'required|string|in:hadir,sakit,izin,alpha',
+            'students.*.keterangan' => 'nullable|string',
+        ]);
+
+        foreach ($request->students as $studentId => $data) {
+
+            absensi::create([
+                'uuid' => Str::uuid(),
+                'student_id' => $studentId,
+                'class_id' => $request->kelas_id,
+                'status' => $data['status'],
+                'keterangan' => $data['keterangan'] ?? null,
+            ]);
+        }
+
+        return redirect()->route('absensi.index')->with('success', 'Absensi berhasil disimpan!');
     }
 
     /**
@@ -61,5 +86,17 @@ class AbsensiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getSiswaByKelas($kelasId)
+    {
+        // Ambil siswa berdasarkan kelas
+        $siswa = siswa::where('class_id', $kelasId)->get(); // Pastikan 'class_id' adalah kolom yang sesuai
+
+        if ($siswa->isEmpty()) {
+            return response()->json(['message' => 'Tidak ada siswa ditemukan.'], 404);
+        }
+
+        return response()->json($siswa);
     }
 }

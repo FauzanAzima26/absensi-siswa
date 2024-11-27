@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
+            $table->foreignId('student_id')->constrained('siswas')->onDelete('cascade');
+            $table->foreignId('class_id')->constrained('kelas')->onDelete('cascade');
+            $table->enum('status', ['hadir', 'sakit', 'izin', 'alpha'])->default('hadir');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

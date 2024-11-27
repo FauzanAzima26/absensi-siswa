@@ -34,7 +34,7 @@
                         <div class="collapse" id="dashboard">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href={{route('panel.dashboard.index')}}>
+                                    <a href={{ route('panel.dashboard.index') }}>
                                         <span class="sub-item">Dashboard</span>
                                     </a>
                                 </li>
@@ -48,8 +48,8 @@
                         </span>
                         <h4 class="text-section">Menu Pengguna</h4>
                     </li>
-                    
-                    @if(auth()->user()->role == 'admin')
+
+                    @if (auth()->user()->role == 'admin')
                         <li
                             class="nav-item {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? 'show' : '' }}">
                             <a data-bs-toggle="collapse" href="#base"
@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item {{ request()->routeIs('guru.*') ? 'active' : '' }}">
-                                        <a href="{{route('panel.guru.index')}}">
+                                        <a href="{{ route('panel.guru.index') }}">
                                             <span class="sub-item">Daftar Guru</span>
                                         </a>
                                     </li>
@@ -81,15 +81,17 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#tables">
+                    <li
+                        class="nav-item {{ request()->routeIs('absensi.*') || request()->routeIs('nilai.*') ? 'show' : '' }}">
+                        <a data-bs-toggle="collapse" href="#tables"
+                            class="{{ request()->routeIs('absensi.*') || request()->routeIs('nilai.*') ? '' : 'collapsed' }}">
                             <i class="fas fa-check-circle"></i>
                             <p>Absensi Siswa</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse" id="tables">
+                        <div class="collapse {{ request()->routeIs('absensi.*') ? 'show' : '' }}" id="tables">
                             <ul class="nav nav-collapse">
-                                <li>
+                                <li class="nav-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
                                     <a href="/absensi">
                                         <span class="sub-item">Data Absensi</span>
                                     </a>
