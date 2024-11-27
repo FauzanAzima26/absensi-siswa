@@ -8,14 +8,39 @@ use App\Models\Backend\Kelas;
 use App\Models\Backend\absensi;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\siswa;
+use Yajra\DataTables\DataTables;
 
 class AbsensiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = absensi::with('siswa')->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . route('absensi.show', $row->uuid) . '" class="btn btn-primary btn-sm" title="View">';
+                    $btn .= '<i class="fa fa-eye"></i>';
+                    $btn .= '</a>';
+                    $btn .= ' <a href="' . route('absensi.edit', $row->uuid) . '" class="btn btn-warning btn-sm" title="Edit">';
+                    $btn .= '<i class="fa fa-edit"></i>';
+                    $btn .= '</a>';
+                    $btn .= ' <form action="' . route('absensi.destroy', $row->uuid) . '" method="POST" style="display:inline;" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">';
+                    $btn .= csrf_field();
+                    $btn .= method_field("DELETE");
+                    $btn .= '<button type="submit" class="btn btn-danger btn-sm" title="Delete">';
+                    $btn .= '<i class="fa fa-trash"></i>';
+                    $btn .= '</button>';
+                    $btn .= '</form>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('backend.absensi siswa.absensi.index');
     }
 
@@ -25,7 +50,6 @@ class AbsensiController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        // dd($kelas);
         return view('backend.absensi siswa.absensi.create', compact('kelas'));
     }
 
@@ -43,13 +67,13 @@ class AbsensiController extends Controller
         ]);
 
         foreach ($request->students as $studentId => $data) {
-
             absensi::create([
                 'uuid' => Str::uuid(),
                 'student_id' => $studentId,
                 'class_id' => $request->kelas_id,
+                'date' => $request->tanggal,
                 'status' => $data['status'],
-                'keterangan' => $data['keterangan'] ?? null,
+                'keterangan' => $data['keterangan'] ?? '-',
             ]);
         }
 
@@ -61,7 +85,8 @@ class AbsensiController extends Controller
      */
     public function show(string $uuid)
     {
-        return view('backend.absensi siswa.absensi.show');
+        $absensi = absensi::where('uuid', $uuid)->firstOrFail();
+        return view('backend.absensi siswa.absensi.show', compact('absensi'));
     }
 
     /**
@@ -69,29 +94,46 @@ class AbsensiController extends Controller
      */
     public function edit(string $uuid)
     {
-        return view('backend.absensi siswa.absensi.edit');
+        $absensi = absensi::where('uuid', $uuid)->firstOrFail();
+        $kelas = Kelas::all();
+        return view('backend.absensi siswa.absensi.edit', compact('absensi', 'kelas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $uuid)
     {
-        //
+        $absensi = absensi::where('uuid', $uuid)->firstOrFail();
+
+        $request->validate([
+            'status' => 'required|string|in:hadir,sakit,izin,alpha',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $absensi->update([
+            'status' => $request->status,
+            'keterangan' => $request->keterangan,
+        ]);
+
+        return redirect()->route('absensi.index')->with('success', 'Absensi berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid)
     {
-        //
+        $absensi = absensi::where('uuid', $uuid)->firstOrFail();
+        $absensi->delete();
+
+        return redirect()->route('absensi.index')->with('success', 'Absensi berhasil dihapus!');
     }
 
     public function getSiswaByKelas($kelasId)
     {
         // Ambil siswa berdasarkan kelas
-        $siswa = siswa::where('class_id', $kelasId)->get(); // Pastikan 'class_id' adalah kolom yang sesuai
+        $siswa = siswa::where('class_id', $kelasId)->get();
 
         if ($siswa->isEmpty()) {
             return response()->json(['message' => 'Tidak ada siswa ditemukan.'], 404);

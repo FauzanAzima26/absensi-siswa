@@ -14,15 +14,15 @@ class absensi extends Model
     protected $fillable = [
         'uuid',
         'student_id',
-        'date',
         'class_id',
+        'date',
         'status',
         'keterangan',
     ];
 
     public function siswa(): BelongsTo
     {
-        return $this->belongsTo(siswa::class, 'student_id');
+        return $this->belongsTo(Siswa::class, 'student_id');
     }
 
     public function kelas(): BelongsTo

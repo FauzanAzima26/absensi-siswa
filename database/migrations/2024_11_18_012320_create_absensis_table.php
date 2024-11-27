@@ -16,8 +16,9 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->foreignId('student_id')->constrained('siswas')->onDelete('cascade');
             $table->foreignId('class_id')->constrained('kelas')->onDelete('cascade');
+            $table->date('date');
             $table->enum('status', ['hadir', 'sakit', 'izin', 'alpha'])->default('hadir');
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
