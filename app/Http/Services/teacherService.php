@@ -2,8 +2,9 @@
 
 namespace App\Http\Services;
 
-use App\Models\Backend\Teacher;
 use App\Models\User;
+use App\Models\Backend\Teacher;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class teacherService
@@ -96,5 +97,19 @@ class teacherService
     public function update(array $data, string $id)
     {
         return Teacher::where('uuid', $id)->update($data);
+    }
+
+    public function delete(string $id)
+    {
+        $getTeacher = $this->getFirstBy('uuid', $id);
+    
+            Storage::disk('public')->delete('images/' . $getTeacher->image);
+
+            User::destroy($getTeacher->user_id);
+    
+        // Hapus data guru
+        $getTeacher->delete();
+    
+        return $getTeacher;
     }
 }

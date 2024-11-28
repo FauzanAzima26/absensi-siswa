@@ -96,7 +96,11 @@ class GuruController extends Controller
 
     public function destroy(string $id)
     {
+        $teacher = $this->teacherService->getFirstBy('uuid', $id);
 
+        $this->teacherService->delete($id);
+
+        return response()->json(['message' => 'Data Guru Berhasil Dihapus...']);
     }
 
     public function getData()
