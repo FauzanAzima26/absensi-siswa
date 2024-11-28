@@ -57,3 +57,5 @@ Route::resource('siswa', SiswaController::class)->only([
     'destroy',
     'show'
 ]);
+
+Route::get('/kelas/{kelasId}/siswa', [AbsensiController::class, 'getSiswaByKelas']);

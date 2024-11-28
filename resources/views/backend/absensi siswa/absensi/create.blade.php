@@ -3,114 +3,144 @@
 @section('title', 'Add Absensi')
 
 @section('content')
-<div class="page-inner">
-    <div class="page-header">
-        <h3 class="fw-bold mb-3">Absensi Siswa</h3>
-        <ul class="breadcrumbs mb-3">
-            <li class="nav-home">
-                <a href="#">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">Add Absensi</a>
-            </li>
-        </ul>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Add Absensi</div>
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Absensi Siswa</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Add Absensi</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">Form Absensi Siswa</div>
+                    </div>
+                    <form action="{{ route('absensi.store') }}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="kelas_id">Nama Kelas</label>
+                                        <select class="form-control" id="kelas_id" name="kelas_id" required>
+                                            <option value="" disabled selected>Pilih Kelas</option>
+                                            @foreach ($kelas as $k)
+                                                <option value="{{ $k->id }}">{{ $k->name_kelas }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="tanggal">Tanggal Absensi</label>
+                                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Nama Siswa</th>
+                                            <th>Status Absensi</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="students-table-body">
+                                        <!-- Data siswa akan dimasukkan di sini -->
+                                    </tbody>
+                                </table>
+                                <div id="spinner" style="display: none;" class="text-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action text-end">
+                            <button class="btn btn-success" type="submit">
+                                <i class="fas fa-check"></i> Submit
+                            </button>
+                            <a href="{{ route('absensi.index') }}" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('absensi.store') }}" method="POST">
-                    @csrf
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Nama Siswa</label>
-                                    <input type="text"
-                                           class="form-control @error('name') is-invalid @enderror"
-                                           id="name"
-                                           name="name"
-                                           placeholder="Enter nama Siswa"
-                                           value="{{ old('name') }}"
-                                           required>
-                                    @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="status">Status Siswa</label>
-                                    <select class="form-control @error('status') is-invalid @enderror"
-                                            id="status"
-                                            name="status"
-                                            required>
-                                        <option value="">Pilih Status Siswa</option>
-                                        <option value="Aktif" {{ old('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                                        <option value="Tidak Aktif" {{ old('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
-                                    <input type="date"
-                                           class="form-control @error('tanggal') is-invalid @enderror"
-                                           id="tanggal"
-                                           name="tanggal"
-                                           value="{{ old('tanggal') }}"
-                                           required>
-                                    @error('tanggal')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="keterangan">Keterangan</label>
-                                    <select class="form-control @error('keterangan') is-invalid @enderror"
-                                            id="keterangan"
-                                            name="keterangan"
-                                            required>
-                                        <option value="">Pilih Keterangan</option>
-                                        <option value="Hadir" {{ old('keterangan') == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                                        <option value="Alpha" {{ old('keterangan') == 'Alpha' ? 'selected' : '' }}>Alpha</option>
-                                        <option value="Izin" {{ old('keterangan') == 'Izin' ? 'selected' : '' }}>Izin</option>
-                                        <option value="Terlambat" {{ old('keterangan') == 'Terlambat' ? 'selected' : '' }}>Terlambat</option>
-                                    </select>
-                                    @error('keterangan')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fas fa-check"></i> Submit
-                        </button>
-                        <a href="{{ route('absensi.index') }}" class="btn btn-danger">
-                            <i class="fas fa-times"></i> Cancel
-                        </a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
+
+    <script>
+        document.getElementById('kelas_id').addEventListener('change', function() {
+            const classId = this.value;
+            const studentsTableBody = document.getElementById('students-table-body');
+            const spinner = document.getElementById('spinner');
+            studentsTableBody.innerHTML = '';
+            spinner.style.display = 'block';
+
+            if (classId) {
+                fetch(`/kelas/${classId}/siswa`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        spinner.style.display = 'none';
+
+                        if (data.length === 0) {
+                            studentsTableBody.innerHTML =
+                                '<tr><td colspan="3" class="text-center">Tidak ada siswa ditemukan.</td></tr>';
+                        } else {
+                            data.forEach(student => {
+                                const row = `
+                                    <tr>
+                                        <td>${student.name}</td>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="students[${student.id}][status]" value="hadir" required checked> Hadir
+                                                </label>
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="students[${student.id}][status]" value="sakit"> Sakit
+                                                </label>
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="students[${student.id}][status]" value="izin"> Izin
+                                                </label>
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="students[${student.id}][status]" value="alpha"> Alpha
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="students[${student.id}][keterangan]" placeholder="Keterangan (optional)" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                `;
+                                studentsTableBody.insertAdjacentHTML('beforeend', row);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        spinner.style.display = 'none';
+                    });
+            } else {
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
 @endsection
-
-
-
