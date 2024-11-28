@@ -21,7 +21,7 @@ class teacherRequest extends FormRequest
      */
     public function rules(): array
     {
-        $routeId= $this->route('teacher');
+        $routeId= $this->route('guru');
         return [
             'nip' => 'required|string|max:20|unique:teachers,nip,'.$routeId . ',uuid',
             'name' => 'required|string|max:255',
@@ -29,7 +29,7 @@ class teacherRequest extends FormRequest
             'phone' => 'required|string|max:15',
             'email' => 'required|email|unique:teachers,email,'.$routeId. ',uuid',
             'image' => $this->isMethod('POST') ? 'required|image|mimes:jpg,jpeg,png|max:2048' : 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'password' => 'required|string|min:8|',
+            'password' => $this->isMethod('POST') ? 'required|string|min:8' : 'nullable|string|min:8',
         ];
     }
 }

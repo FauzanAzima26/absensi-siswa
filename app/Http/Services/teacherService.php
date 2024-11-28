@@ -42,12 +42,8 @@ class teacherService
                 $btn =
                     '<div class="text-center" width="10%">
                     <div class="btn-group">
-                        <a href="#"  class="btn btn-sm btn-primary">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        <a href="#"  class="btn btn-sm btn-warning">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                        <button type="button" class="btn btn-sm btn-primary me-2" onclick="detailTeacher(this)" data-id="' . $row->uuid . '"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-sm btn-warning me-2" onclick="editTeacher(this)" data-id="' . $row->uuid . '"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-sm btn-danger" onclick="destroyTeacher(this)" data-id="' . $row->uuid . '"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>';
@@ -63,7 +59,6 @@ class teacherService
             ->addIndexColumn()
             ->make(true);
     }
-
 
     public function createUser($data)
     {
@@ -93,9 +88,13 @@ class teacherService
         return Teacher::create($teacherData);
     }
 
-    public function getUser()
+    public function getFirstBy($columns, $value)
     {
-        return User::latest()->get(['id', 'name']);
+        return Teacher::with('user')->where($columns, $value)->firstOrFail();
     }
 
+    public function update(array $data, string $id)
+    {
+        return Teacher::where('uuid', $id)->update($data);
+    }
 }
