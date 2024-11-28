@@ -65,6 +65,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.4/datatables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             $(document).ready(function() {
@@ -94,11 +95,9 @@
                         {
                             data: 'keterangan',
                             name: 'keterangan',
-                            render: function(data, type, row) {
-                                if (data) {
-                                    return data.length > 50 ? data.substring(0, 50) + '...' : data;
-                                }
-                                return 'Tidak ada keterangan';
+                            render: function(data) {
+                                return data ? (data.length > 50 ? data.substring(0, 50) + '...' :
+                                    data) : 'Tidak ada keterangan';
                             }
                         },
                         {
@@ -110,7 +109,85 @@
                     ]
                 });
             });
+
+            const deleteAbsen = (uuid) => {
+                Swal.fire({
+                    title: "Apakah Anda yakin?",
+                    text: "Tindakan ini tidak dapat dibatalkan.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, hapus data ini!",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: `/absensi/${uuid}`,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Terhapus!",
+                                    text: response.message,
+                                    icon: "success",
+                                    timer: 2500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    $('#absensi-table').DataTable().ajax.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: xhr.responseJSON ? xhr.responseJSON.message :
+                                        "Data Anda belum terhapus.",
+                                    icon: "error"
+                                });
+                            }
+                        });
+                    }
+                });
+            };
         </script>
+
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.reload();
+                });
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            </script>
+        @endif
+
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan!',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                });
+            </script>
+        @endif
     @endpush
 
 @endsection
