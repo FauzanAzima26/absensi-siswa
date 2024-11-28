@@ -14,14 +14,18 @@ $(document).ready(function () {
             { data: "name", name: "name" },
             { data: "nip", name: "nip" },
             { data: "address", name: "address" },
-            { data: "phone", name: "phone" },   
-            { data: "email", name: "email" },   
+            { data: "phone", name: "phone" },
+            { data: "email", name: "email" },
             {
                 data: "image",
                 name: "image",
-                render: function(data) {
-                    return '<img src="' + data + '" alt="Image" style="width: 100px; height: auto;"/>'
-                }
+                render: function (data) {
+                    return (
+                        '<img src="' +
+                        data +
+                        '" alt="Image" style="width: 100px; height: auto;"/>'
+                    );
+                },
             },
             {
                 data: "action",
@@ -34,14 +38,13 @@ $(document).ready(function () {
 });
 
 const modal = (e) => {
-
     submitMethod = "create";
 
     resetForm("#form");
     $("#modal").modal("show");
     $(".modalTitle").html('<i class="fa fa-plus"></i> Create');
     $(".btnSubmit").html('<i class="fa fa-save"></i> Save');
-    $("#password").closest('.mb-3').show();
+    $("#password").closest(".mb-3").show();
     resetValidation();
 };
 
@@ -104,9 +107,8 @@ const editTeacher = (e) => {
             $("#phone").val(parsedData.phone);
             $("#email").val(parsedData.email);
 
-                        // Hide the password field if editing
-                        $("#password").closest('.mb-3').hide();
-
+            // Hide the password field if editing
+            $("#password").closest(".mb-3").hide();
 
             $("#modal").modal("show");
             $(".modalTitle").html('<i class="fa fa-edit"></i> Edit');
@@ -124,7 +126,7 @@ const editTeacher = (e) => {
 };
 
 const destroyTeacher = (e) => {
-    let id = e.getAttribute('data-id');
+    let id = e.getAttribute("data-id");
 
     Swal.fire({
         title: "Are you sure?",
@@ -136,14 +138,16 @@ const destroyTeacher = (e) => {
         cancelButtonText: "Cancel",
         allowOutsideClick: false,
         showCancelButton: true,
-        showCloseButton: true
+        showCloseButton: true,
     }).then((result) => {
         if (result.value) {
             startLoading();
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                 },
                 type: "DELETE",
                 url: "/panel/guru/" + id,
@@ -155,8 +159,50 @@ const destroyTeacher = (e) => {
                 },
                 error: function (response) {
                     console.log(response);
-                }
+                },
             });
         }
-    })
-}
+    });
+};
+
+const detailTeacher = (e) => {
+    let id = e.getAttribute("data-id");
+
+    startLoading(); // Menampilkan indikator loading
+
+    $.ajax({
+        type: "GET",
+        url: "/panel/guru/" + id, // Sesuaikan dengan endpoint API yang sesuai
+        success: function (response) {
+            let parsedData = response.data; // Ambil data guru dari response
+
+            // Mengisi data ke dalam modal
+            $("#viewName").val(parsedData.name);
+            $("#viewNip").val(parsedData.nip);
+            $("#viewAddress").val(parsedData.address);
+            $("#viewPhone").val(parsedData.phone);
+            $("#viewEmail").val(parsedData.email);
+
+            // Menampilkan gambar
+            const imageContainer = document.getElementById('viewImageContainer');
+            imageContainer.innerHTML = ''; // Kosongkan sebelumnya
+            if (parsedData.image) {
+                const img = document.createElement('img');
+                img.src =  '/storage/images/' + parsedData.image; // Ganti dengan path yang sesuai
+                img.alt = 'Pas Foto';
+                img.className = 'img-fluid'; // Tambahkan kelas untuk styling
+                imageContainer.appendChild(img);
+            }
+
+            // Tampilkan modal
+            $("#modalView").modal("show");
+            $(".modalTitle").html('<i class="fa fa-eye"></i> Detail guru');
+            stopLoading(); // Menghentikan indikator loading
+        },
+        error: function (jqXHR, response) {
+            console.log(jqXHR.responseText);
+            toastError(jqXHR.responseText); // Tampilkan pesan error
+            stopLoading(); // Menghentikan indikator loading
+        },
+    });
+};

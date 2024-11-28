@@ -76,4 +76,5 @@
 </div>
 
 @include('backend.data umum.guru._modal')
+@include('backend.data umum.guru._modalDetail')
 @endsection
