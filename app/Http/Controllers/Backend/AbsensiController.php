@@ -12,9 +12,11 @@ use Yajra\DataTables\DataTables;
 
 class AbsensiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('guru');
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -22,6 +24,11 @@ class AbsensiController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
+
+                    if(auth()->user()->role == 'admin') {
+                        return '-';
+                    }
+
                     $btn = '<a href="' . route('absensi.show', $row->uuid) . '" class="btn btn-primary btn-sm" title="View">';
                     $btn .= '<i class="fa fa-eye"></i>';
                     $btn .= '</a>';

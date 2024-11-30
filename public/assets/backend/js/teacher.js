@@ -191,6 +191,8 @@ const detailTeacher = (e) => {
                 img.src =  '/storage/images/' + parsedData.image; // Ganti dengan path yang sesuai
                 img.alt = 'Pas Foto';
                 img.className = 'img-fluid'; // Tambahkan kelas untuk styling
+                img.width = 200; // Atur lebar gambar
+                img.height = 100; // Atur tinggi gambar (opsional)
                 imageContainer.appendChild(img);
             }
 
