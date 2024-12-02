@@ -19,22 +19,23 @@
 
         <div class="d-flex justify-content-end">
             <form method="GET" action="{{ route('siswa.index') }}" class="d-flex align-items-center">
-                <label for="perPage" class="me-2">Tampilkan:</label>
-                <select name="perPage" id="perPage" class="form-select w-auto" onchange="this.form.submit()">
-                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                    <option value="25" {{ request('perPage') == 25 ? 'selected' : '' }}>25</option>
-                    <option value="50" {{ request('perPage') == 50 ? 'selected' : '' }}>50</option>
-                    <option value="100" {{ request('perPage') == 100 ? 'selected' : '' }}>100</option>
-                </select>
+            <label for="perPage" class="me-2">Tampilkan:</label>
+            <select name="perPage" id="perPage" class="form-select w-auto" onchange="this.form.submit()">
+                <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                <option value="25" {{ request('perPage') == 25 ? 'selected' : '' }}>25</option>
+                <option value="50" {{ request('perPage') == 50 ? 'selected' : '' }}>50</option>
+                <option value="100" {{ request('perPage') == 100 ? 'selected' : '' }}>100</option>
+            </select>
+            <input type="hidden" name="search" value="{{ request('search') }}">
             </form>
         </div>
-        
+
 
         <div class="d-flex">
             <form action="{{ url('siswa') }}" method="get" class="input-group w-auto" style="max-width: 400px;">
-                <input type="search" name="search" class="form-control rounded-start border-primary shadow-sm"
-                    placeholder="Cari siswa..." value="{{ request('search') }}" aria-label="Search">
-                <button type="submit" class="btn btn-primary shadow-sm">Cari</button>
+            <input type="search" name="search" class="form-control rounded-start border-primary shadow-sm"
+                placeholder="Cari siswa..." value="{{ request('search') }}" aria-label="Search" oninput="this.form.submit()">
+            <button type="submit" class="btn btn-primary shadow-sm">Cari</button>
             </form>
         </div>
     </div>
@@ -89,7 +90,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No Data Available</td>
+                                    <td colspan="7" class="text-center">No Data Available</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -113,91 +114,26 @@
 
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src={{ asset('assets/backend/js/siswa.js') }}></script>
 
-<script>
-  const deleteSiswa = (e) => {
-    let uuid = e.getAttribute('data-uuid'); // Ambil UUID dari tombol
-    console.log("UUID to delete:", uuid); // Debug UUID
-
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: "DELETE",
-                url: `/siswa/${uuid}`,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-                },
-                success: function(response) {
-                    console.log("Response:", response);
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: response.message,
-                        icon: "success",
-                        timer: 2500,
-                        showConfirmButton: false
-                    }).then(() => {
-                        window.location.reload();
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("XHR:", xhr);
-                    console.error("Status:", status);
-                    console.error("Error:", error);
-                    Swal.fire({
-                        title: "Failed!",
-                        text: xhr.responseJSON ? xhr.responseJSON.message : "Your data has not been deleted.",
-                        icon: "error"
-                    });
-                }
-            });
-        }
-    });
-};
-
-</script>
 
 @if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: '{{ session('success') }}',
-        timer: 2000,
-        showConfirmButton: false
-    }).then(() => {
-        window.location.reload();
-    });
-</script>
+    <script>
+        sessionStorage.setItem('success', '{{ session('success') }}');
+    </script>
 @endif
 
 @if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Gagal!',
-        text: '{{ session('error') }}',
-        timer: 2000,
-        showConfirmButton: false
-    });
-</script>
+    <script>
+        sessionStorage.setItem('error', '{{ session('error') }}');
+    </script>
 @endif
 
 @if($errors->any())
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Terjadi Kesalahan!',
-        html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
-    });
-</script>
+    <script>
+        const errors = @json($errors->all());
+        sessionStorage.setItem('validationErrors', JSON.stringify(errors));
+    </script>
 @endif
 
 @endpush
