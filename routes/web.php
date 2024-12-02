@@ -29,6 +29,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     // Guru
     Route::resource('guru', GuruController::class)->names('panel.guru');
     Route::get('guru-serverside', [GuruController::class, 'getData'])->name('panel.guru.serverside');
+    Route::get('guru-getClass', [GuruController::class, 'getClasses'])->name('panel.guru.getClass');
 
     Route::post('absensi/download', [ExportController::class, 'download'])->name('panel.absensi.download');
 

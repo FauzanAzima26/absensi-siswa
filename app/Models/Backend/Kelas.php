@@ -10,7 +10,7 @@ class Kelas extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name_kelas', 'wali_kelas', 'jumlah_siswa'];
+    protected $fillable = ['id', 'name_kelas', 'wali_kelas', 'jumlah_siswa'];
 
     public function siswas(): HasMany
     {
@@ -20,5 +20,10 @@ class Kelas extends Model
     public function absensis(): HasMany
     {
         return $this->hasMany(absensi::class, 'class_id');
+    }
+
+    public function teachers(): HasMany
+    {
+        return $this->hasMany(Teacher::class, 'class_id');
     }
 }

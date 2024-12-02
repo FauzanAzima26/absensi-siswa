@@ -18,24 +18,19 @@ class teacherService
 
         if (empty(request()->search['value'])) {
             $data = Teacher::latest()
-                ->with('user:id,name')
+                ->with('user:id,name', 'class:id,name_kelas')
                 ->offset($start)
                 ->limit($limit)
-                ->get(['id', 'uuid', 'user_id', 'nip', 'name', 'email', 'phone', 'address', 'image']);
+                ->get(['id', 'uuid', 'user_id', 'class_id', 'nip', 'name', 'email', 'phone', 'address', 'image']);
         } else {
             $data = Teacher::filter(request()->search['value'])
                 ->latest()
-                ->with('user:id,name')
+                ->with('user:id,name', 'class:id,name_kelas')
                 ->offset($start)
                 ->limit($limit)
-                ->get(['id', 'uuid', 'user_id', 'nip', 'name', 'email', 'phone', 'address', 'image']);
+                ->get(['id', 'uuid', 'user_id', 'class_id', 'nip', 'name', 'email', 'phone', 'address', 'image']);
 
             $totalFiltered = $data->count();
-        }
-
-        // Menambahkan URL gambar
-        foreach ($data as $teacher) {
-            $teacher->image = url('storage/images/' . $teacher->image); // Menghasilkan URL gambar
         }
 
         return DataTables::of($data)
@@ -50,13 +45,18 @@ class teacherService
                 </div>';
                 return $btn;
             })
+            ->addColumn('class_id', function ($row) {
+                return $row->class 
+                    ? '<p>' . htmlspecialchars($row->class->name_kelas) . '</p>' 
+                    : '<p>No Class</p>';
+            })
             ->with([
                 'recordsTotal' => $totalData,
                 'recordsFiltered' => $totalFiltered,
                 'start' => $start,
             ])
             ->setOffset($start)
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'class_id'])
             ->addIndexColumn()
             ->make(true);
     }
@@ -79,6 +79,7 @@ class teacherService
         $teacherData = [
             'user_id' => $data['user_id'], // ID User yang baru dibuat
             'image' => $data['image'],
+            'class_id' => $data['class_id'], 
             'nip' => $data['nip'],
             'name' => $data['name'],
             'email' => $data['email'],

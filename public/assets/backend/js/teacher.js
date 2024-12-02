@@ -13,20 +13,7 @@ $(document).ready(function () {
             { data: "DT_RowIndex", name: "DT_RowIndex" },
             { data: "name", name: "name" },
             { data: "nip", name: "nip" },
-            { data: "address", name: "address" },
-            { data: "phone", name: "phone" },
-            { data: "email", name: "email" },
-            {
-                data: "image",
-                name: "image",
-                render: function (data) {
-                    return (
-                        '<img src="' +
-                        data +
-                        '" alt="Image" style="width: 100px; height: auto;"/>'
-                    );
-                },
-            },
+            { data: "class_id", name: "class_id" },
             {
                 data: "action",
                 name: "action",
@@ -46,6 +33,28 @@ const modal = (e) => {
     $(".btnSubmit").html('<i class="fa fa-save"></i> Save');
     $("#password").closest(".mb-3").show();
     resetValidation();
+
+     // Mengambil data kelas
+     $.ajax({
+        url: 'guru-getClass', // Endpoint untuk mengambil data kelas
+        type: 'GET',
+        success: function (data) {
+            console.log(data); // Cek data yang diterima
+            if (Array.isArray(data)) { // Pastikan data adalah array
+                $('#class_id').empty(); // Kosongkan select box
+                $('#class_id').append('<option value="" disabled selected>Pilih Class</option>');
+                $.each(data, function (index, classItem) {
+                    $('#class_id').append(`<option value="${classItem.id}">${classItem.name_kelas}</option>`);
+                });
+            } else {
+                console.error('Data yang diterima bukan array:', data);
+                // Tampilkan pesan kesalahan kepada pengguna
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching classes:', error);
+        }
+    });
 };
 
 // create/save data
@@ -93,12 +102,32 @@ const editTeacher = (e) => {
     resetForm("#form");
     resetValidation();
 
+    // Ambil data kelas untuk mengisi select box
+    $.ajax({
+        url: 'guru-getClass', // Endpoint untuk mengambil data kelas
+        type: 'GET',
+        success: function (data) {
+            if (Array.isArray(data)) {
+                $('#class_id').empty(); // Kosongkan select box
+                $('#class_id').append('<option value="" disabled selected>Pilih Class</option>');
+                $.each(data, function (index, classItem) {
+                    $('#class_id').append(`<option value="${classItem.id}">${classItem.name_kelas}</option>`);
+                });
+            } else {
+                console.error('Data yang diterima bukan array:', data);
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching classes:', error);
+        }
+    });
+
+    // Ambil data guru berdasarkan ID
     $.ajax({
         type: "GET",
         url: "/panel/guru/" + id,
         success: function (response) {
             let parsedData = response.data;
-            let parsedUser = response.user;
 
             $("#id").val(parsedData.uuid);
             $("#name").val(parsedData.name);
@@ -106,6 +135,7 @@ const editTeacher = (e) => {
             $("#address").val(parsedData.address);
             $("#phone").val(parsedData.phone);
             $("#email").val(parsedData.email);
+            $("#class_id").val(parsedData.class_id); // Set nilai select box
 
             // Hide the password field if editing
             $("#password").closest(".mb-3").hide();

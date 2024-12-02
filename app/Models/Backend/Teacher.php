@@ -14,6 +14,7 @@ class Teacher extends Model
     protected $fillable = [
         'uuid',
         'user_id',
+        'class_id',
         'nip',
         'name',
         'email',
@@ -38,4 +39,9 @@ class Teacher extends Model
         return Teacher::where('name', 'like', "%{$search}%")
         ->orWhere('nip', 'like', "%{$search}%");
     }
+
+public function class()
+{
+    return $this->belongsTo(Kelas::class, 'class_id');
+}
 }

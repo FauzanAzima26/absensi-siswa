@@ -9,18 +9,27 @@
             </div>
             <div class="modal-body">
                 <form action="" id="form">
+                    @csrf
                     <input type="hidden" name="id" id="id">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" name="name" id="name" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="nip" class="form-label">NIP</label>
                                 <input type="text" name="nip" id="nip" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="class_id" class="form-label">Class</label>
+                                <select name="class_id" id="class_id" class="form-select">
+                                    <option value="" disabled selected>Pilih Class</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -60,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="form" class="btn btn-primary btnSubmit"></button>
+                <button type="submit" form="form" class="btn btn-primary btnSubmit">Submit</button>
             </div>
         </div>
     </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Backend\Kelas;
 use App\Http\Services\imageService;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\teacherRequest;
@@ -59,10 +61,10 @@ class GuruController extends Controller
     public function update(teacherRequest $request, string $id)
     {
         $data = $request->validated();
-        
+
         // Ambil data guru berdasarkan UUID
         $getData = $this->teacherService->getFirstBy('uuid', $id);
-        
+
         try {
             // Jika ada gambar baru yang di-upload
             if ($request->hasFile('image')) {
@@ -70,24 +72,30 @@ class GuruController extends Controller
                 if ($getData->image) {
                     $this->imageService->deleteImage($getData->image, 'images');
                 }
-    
+
                 // Simpan gambar baru dan tambahkan ke data
                 $data['image'] = $this->imageService->storeImage($data);
             }
-    
+
             // Update user password if provided
-            if ($request->filled('password')) {
-                $user = User::find($getData->user_id);
-                $user->password = Hash::make($request->password);
-                $user->save();
+            $user = User::find($getData->user_id);
+
+            // Perbarui data pengguna lainnya jika ada
+            if ($request->filled('name')) {
+                $user->name = $request->name;
             }
-    
+            if ($request->filled('email')) {
+                $user->email = $request->email;
+            }
+
+            $user->save(); // Simpan perubahan pengguna
+
             // Hapus password dari data sebelum memperbarui guru
             unset($data['password']);
-    
+
             // Perbarui data guru
             $this->teacherService->update(array_merge($data, ['user_id' => $getData->user_id]), $getData->uuid);
-            
+
             return response()->json(['message' => 'Data guru telah diperbarui dengan sukses!']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
@@ -106,5 +114,11 @@ class GuruController extends Controller
     public function getData()
     {
         return $this->teacherService->serverSide();
+    }
+
+    public function getClasses()
+    {
+        $kelas = Kelas::all(); // Ambil semua kelas dari database
+        return response()->json($kelas); // Kembalikan sebagai JSON
     }
 }

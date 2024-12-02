@@ -25,6 +25,7 @@ class teacherRequest extends FormRequest
         return [
             'nip' => 'required|string|max:20|unique:teachers,nip,'.$routeId . ',uuid',
             'name' => 'required|string|max:255',
+            'class_id' => 'required|exists:kelas,id',
             'address' => 'required|string',
             'phone' => 'required|string|max:15',
             'email' => 'required|email|unique:teachers,email,'.$routeId. ',uuid',
