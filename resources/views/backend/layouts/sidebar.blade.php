@@ -25,16 +25,16 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 @auth
-                    <li class="nav-item active">
-                        <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                    <li class="nav-item {{ request()->routeIs('panel.dashboard.*') ? 'active show' : '' }}">
+                        <a data-bs-toggle="collapse" href="#dashboard" class="{{ request()->routeIs('panel.dashboard.*') ? '' : 'collapsed' }}" aria-expanded="{{ request()->routeIs('panel.dashboard.*') ? 'true' : 'false' }}">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse" id="dashboard">
+                        <div class="collapse {{ request()->routeIs('panel.dashboard.*') ? 'show' : '' }}" id="dashboard">
                             <ul class="nav nav-collapse">
-                                <li>
-                                    <a href={{ route('panel.dashboard.index') }}>
+                                <li class="nav-item {{ request()->routeIs('panel.dashboard.*') ? 'active' : '' }}">
+                                    <a href="{{ route('panel.dashboard.index') }}">
                                         <span class="sub-item">Dashboard</span>
                                     </a>
                                 </li>
@@ -51,14 +51,14 @@
 
                     @if (auth()->user()->role == 'admin')
                         <li
-                            class="nav-item {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? 'show' : '' }}">
+                            class="nav-item {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('panel.guru.*') ? 'show' : '' }}">
                             <a data-bs-toggle="collapse" href="#base"
-                                class="{{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? '' : 'collapsed' }}">
+                                class="{{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('panel.guru.*') ? '' : 'collapsed' }}">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Data Umum</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('guru.*') ? 'show' : '' }}"
+                            <div class="collapse {{ request()->routeIs('siswa.*') || request()->routeIs('kelas.*') || request()->routeIs('panel.guru.*') ? 'show' : '' }}"
                                 id="base">
                                 <ul class="nav nav-collapse">
                                     <li class="nav-item {{ request()->routeIs('kelas.*') ? 'active' : '' }}">
@@ -66,7 +66,7 @@
                                             <span class="sub-item">Daftar Kelas</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item {{ request()->routeIs('guru.*') ? 'active' : '' }}">
+                                    <li class="nav-item {{ request()->routeIs('panel.guru.*') ? 'active' : '' }}">
                                         <a href="{{ route('panel.guru.index') }}">
                                             <span class="sub-item">Daftar Guru</span>
                                         </a>

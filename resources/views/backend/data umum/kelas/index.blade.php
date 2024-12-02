@@ -47,7 +47,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kelas as $key => $k)
+                                @forelse ($kelas as $key => $k)
                                     <tr>
                                         <td>{{ $key + 1 }}</td> <!-- Menampilkan nomor urut -->
                                         <td>{{ $k->name_kelas }}</td> <!-- Menampilkan nama kelas -->
@@ -63,7 +63,11 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No Data Available</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

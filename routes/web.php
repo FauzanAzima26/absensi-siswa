@@ -6,10 +6,12 @@ use App\Http\Controllers\Backend\GuruController;
 use App\Http\Controllers\Backend\KelasController;
 use App\Http\Controllers\Backend\RekapController;
 use App\Http\Controllers\Backend\SiswaController;
+use App\Http\Controllers\Backend\ExportController;
 use App\Http\Controllers\Backend\AbsensiController;
 use App\Http\Controllers\Backend\dashboardController;
 use App\Http\Controllers\Backend\ProfileGuruController;
 use App\Http\Controllers\Backend\InformasiPribadiController;
+
 
 
 // Route::get('home', function () {
@@ -23,10 +25,13 @@ Route::get('/', function () {
 
 Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('dashboard', dashboardController::class)->names('panel.dashboard');
-
+   
     // Guru
     Route::resource('guru', GuruController::class)->names('panel.guru');
     Route::get('guru-serverside', [GuruController::class, 'getData'])->name('panel.guru.serverside');
+
+    Route::post('absensi/download', [ExportController::class, 'download'])->name('panel.absensi.download');
+
 });
 
 Auth::routes();

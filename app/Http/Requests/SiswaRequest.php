@@ -21,11 +21,12 @@ class SiswaRequest extends FormRequest
      */
     public function rules()
     {
-        $routeId= $this->route('siswa');
+        $routeId = $this->route('siswa');
+
         return [
-            'nisn' => 'required|integer',
+            'nisn' => 'required|integer|unique:siswas,nisn,' . $routeId . ',uuid',
             'name' => 'required|string|max:255',
-            'class_id' => 'required', // Validasi foreign key
+            'class_id' => 'required', 
             'date_of_birth' => 'required|date',
             'address' => 'required|string|max:500',
         ];

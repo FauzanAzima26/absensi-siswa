@@ -45,7 +45,9 @@ class SiswaService
             $query->where('name', 'like', "%{$search}%")
                   ->orWhereHas('class', function ($q) use ($search) {
                       $q->where('name_kelas', 'like', "%{$search}%");
-                  })->orWhere('nisn', 'like', "%{$search}%");
+                  })->orWhere('nisn', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%")
+                  ->orWhere('date_of_birth', 'like', "%{$search}%");
         }
 
         return $query->paginate($paginate);
