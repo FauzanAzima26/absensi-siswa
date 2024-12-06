@@ -212,13 +212,14 @@ const detailTeacher = (e) => {
             $("#viewAddress").val(parsedData.address);
             $("#viewPhone").val(parsedData.phone);
             $("#viewEmail").val(parsedData.email);
+            $("#viewClass").val(parsedData.class_name);
 
             // Menampilkan gambar
             const imageContainer = document.getElementById('viewImageContainer');
             imageContainer.innerHTML = ''; // Kosongkan sebelumnya
             if (parsedData.image) {
                 const img = document.createElement('img');
-                img.src =  '/storage/images/' + parsedData.image; // Ganti dengan path yang sesuai
+                img.src =  '/storage/images/' + parsedData.image;
                 img.alt = 'Pas Foto';
                 img.className = 'img-fluid'; // Tambahkan kelas untuk styling
                 img.width = 200; // Atur lebar gambar

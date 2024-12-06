@@ -52,11 +52,18 @@ class GuruController extends Controller
 
 
     public function show(string $uuid)
-    {
-        return response()->json([
-            'data' => $this->teacherService->getFirstBy('uuid', $uuid),
-        ]);
-    }
+{
+    $teacher = $this->teacherService->getFirstBy('uuid', $uuid);
+
+    $className = $teacher->class ? $teacher->class->name_kelas : null;
+
+    return response()->json([
+        'data' => array_merge(
+            $teacher->only(['uuid', 'name', 'nip', 'address', 'phone', 'email', 'class_id', 'image']),
+            ['class_name' => $className]
+        ),
+    ]);
+}
 
     public function update(teacherRequest $request, string $id)
     {

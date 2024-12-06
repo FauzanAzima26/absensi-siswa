@@ -27,17 +27,23 @@
                             <input type="text" id="viewNip" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="viewAddress" class="form-label">Alamat</label>
-                            <textarea id="viewAddress" class="form-control" rows="3" readonly></textarea>
+                            <label for="viewClass" class="form-label">Class</label>
+                            <input type="text" id="viewClass" class="form-control" readonly>
                         </div>
-                        <div class="mb-3">
-                            <label for="viewPhone" class="form-label">Nomor Kontak</label>
-                            <input type="text" id="viewPhone" class="form-control" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="viewEmail" class="form-label">Email</label>
-                            <input type="text" id="viewEmail" class="form-control" readonly>
-                        </div>    
+                    </div>
+                </div>
+                <div>    
+                    <div class="mb-3">
+                        <label for="viewPhone" class="form-label">Nomor Kontak</label>
+                        <input type="text" id="viewPhone" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="viewEmail" class="form-label">Email</label>
+                        <input type="text" id="viewEmail" class="form-control" readonly>
+                    </div>    
+                    <div class="mb-3">
+                        <label for="viewAddress" class="form-label">Alamat</label>
+                        <textarea id="viewAddress" class="form-control" rows="3" readonly></textarea>
                     </div>
                 </div>
             </div>
