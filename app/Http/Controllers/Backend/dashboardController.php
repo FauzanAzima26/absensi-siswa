@@ -12,7 +12,7 @@ use App\Http\Services\ClassService;
 use App\Http\Services\SiswaService;
 use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class dashboardController extends Controller
 {
     public function __construct(
         private ClassService $classService,

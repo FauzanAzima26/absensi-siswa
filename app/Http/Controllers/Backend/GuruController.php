@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Backend\Kelas;
+use App\Http\Services\ClassService;
 use App\Http\Services\imageService;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -16,14 +17,16 @@ class GuruController extends Controller
 {
     public function __construct(
         private teacherService $teacherService,
-        private imageService $imageService
+        private imageService $imageService,
+        private ClassService $classService
     ) {
         $this->middleware('admin');
     }
 
     public function index()
     {
-        return view('backend.data umum.guru.index');
+        $kelas = $this->classService->select();
+        return view('backend.data umum.guru.index', compact('kelas'));
     }
 
     public function store(TeacherRequest $request)

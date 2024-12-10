@@ -27,9 +27,12 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="class_id" class="form-label">Class</label>
-                                <select name="class_id" id="class_id" class="form-select">
-                                    <option value="" disabled selected>Pilih Class</option>
-                                </select>
+                                <select name="class_id" id="class_id" class="form-control">
+                            <option value="">Pilih Kelas</option>
+                            @foreach($kelas as $class)
+                                <option value="{{ $class->id }}" {{ old('class_id') == $class->id ? 'selected' : '' }}>{{ $class->name_kelas }}</option>
+                            @endforeach
+                        </select>
                             </div>
                         </div>
                     </div>

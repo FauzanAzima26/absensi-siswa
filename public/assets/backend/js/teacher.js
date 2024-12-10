@@ -33,28 +33,6 @@ const modal = (e) => {
     $(".btnSubmit").html('<i class="fa fa-save"></i> Save');
     $("#password").closest(".mb-3").show();
     resetValidation();
-
-     // Mengambil data kelas
-     $.ajax({
-        url: 'guru-getClass', // Endpoint untuk mengambil data kelas
-        type: 'GET',
-        success: function (data) {
-            console.log(data); // Cek data yang diterima
-            if (Array.isArray(data)) { // Pastikan data adalah array
-                $('#class_id').empty(); // Kosongkan select box
-                $('#class_id').append('<option value="" disabled selected>Pilih Class</option>');
-                $.each(data, function (index, classItem) {
-                    $('#class_id').append(`<option value="${classItem.id}">${classItem.name_kelas}</option>`);
-                });
-            } else {
-                console.error('Data yang diterima bukan array:', data);
-                // Tampilkan pesan kesalahan kepada pengguna
-            }
-        },
-        error: function (error) {
-            console.error('Error fetching classes:', error);
-        }
-    });
 };
 
 // create/save data
@@ -101,26 +79,6 @@ const editTeacher = (e) => {
     startLoading();
     resetForm("#form");
     resetValidation();
-
-    // Ambil data kelas untuk mengisi select box
-    $.ajax({
-        url: 'guru-getClass', // Endpoint untuk mengambil data kelas
-        type: 'GET',
-        success: function (data) {
-            if (Array.isArray(data)) {
-                $('#class_id').empty(); // Kosongkan select box
-                $('#class_id').append('<option value="" disabled selected>Pilih Class</option>');
-                $.each(data, function (index, classItem) {
-                    $('#class_id').append(`<option value="${classItem.id}">${classItem.name_kelas}</option>`);
-                });
-            } else {
-                console.error('Data yang diterima bukan array:', data);
-            }
-        },
-        error: function (error) {
-            console.error('Error fetching classes:', error);
-        }
-    });
 
     // Ambil data guru berdasarkan ID
     $.ajax({
