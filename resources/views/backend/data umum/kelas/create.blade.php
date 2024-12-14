@@ -51,23 +51,6 @@
                                 </div>
                             </div>
 
-                            <!-- Input Wali Kelas -->
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label for="wali_kelas">Wali Kelas</label>
-                                    <input type="text" 
-                                           class="form-control @error('wali_kelas') is-invalid @enderror" 
-                                           id="wali_kelas" 
-                                           name="wali_kelas" 
-                                           placeholder="Enter wali kelas" 
-                                           value="{{ old('wali_kelas') }}" 
-                                           required>
-                                    @error('wali_kelas')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
                             <!-- Input Jumlah Siswa -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">

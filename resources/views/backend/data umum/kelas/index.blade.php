@@ -41,7 +41,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kelas</th>
-                                    <th>Wali Kelas</th>
                                     <th>Jumlah Siswa</th>
                                     <th>Action</th>
                                 </tr>
@@ -51,7 +50,6 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td> <!-- Menampilkan nomor urut -->
                                         <td>{{ $k->name_kelas }}</td> <!-- Menampilkan nama kelas -->
-                                        <td>{{ $k->wali_kelas }}</td> <!-- Menampilkan wali kelas -->
                                         <td>{{ $k->jumlah_siswa }}</td> <!-- Menampilkan jumlah siswa -->
                                         <td>
                                             <!-- Tombol Edit dan Delete -->

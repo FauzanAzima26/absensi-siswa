@@ -14,7 +14,7 @@ class AbsensiController extends Controller
 {
     public function __construct()
     {
-      
+        $this->middleware('guru')->only('create', 'store', 'edit', 'update');
     }
 
     public function index(Request $request)
