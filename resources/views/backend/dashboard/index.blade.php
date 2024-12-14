@@ -124,7 +124,7 @@
                                                 legendColor: '#f3545d',
                                                 fill: true,
                                                 borderWidth: 2,
-                                                data: @json(array_values($alpha)), 
+                                                data: @json(array_values($alpha)),
                                             }, {
                                                 label: 'Sakit',
                                                 borderColor: '#fdaf4b',
@@ -134,7 +134,7 @@
                                                 legendColor: '#fdaf4b',
                                                 fill: true,
                                                 borderWidth: 2,
-                                                data: @json(array_values($sakit)), 
+                                                data: @json(array_values($sakit)),
                                             }, {
                                                 label: 'Izin',
                                                 borderColor: '#177dff',
@@ -144,7 +144,7 @@
                                                 legendColor: '#177dff',
                                                 fill: true,
                                                 borderWidth: 2,
-                                                data: @json(array_values($izin)), 
+                                                data: @json(array_values($izin)),
                                             }, {
                                                 label: 'Hadir',
                                                 borderColor: '#28a745',
@@ -154,7 +154,7 @@
                                                 legendColor: '#28a745',
                                                 fill: true,
                                                 borderWidth: 2,
-                                                data: @json(array_values($hadir)), 
+                                                data: @json(array_values($hadir)),
                                             }]
                                         },
                                         options: {
@@ -164,7 +164,7 @@
                                                 display: true,
                                                 position: 'bottom',
                                                 labels: {
-                                                    usePointStyle: true 
+                                                    usePointStyle: true
                                                 }
                                             },
                                             tooltips: {
