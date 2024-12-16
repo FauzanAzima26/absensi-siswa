@@ -31,20 +31,13 @@
         </div>
 
         <div class="d-flex">
-            <form action="{{ url('siswa') }}" method="get" class="position-relative" style="max-width: 400px;" id="searchForm">
-                <input type="search" name="search" class="form-control rounded border-primary shadow-sm pe-5"
+            <form action="{{ url('siswa') }}" method="get" class="input-group w-auto" style="max-width: 400px;" id="searchForm">
+                <input type="search" name="search" class="form-control rounded-start border-primary shadow-sm"
                     placeholder="Cari siswa..." value="{{ request('search') }}" aria-label="Search" id="searchInput">
-                @if(request('search'))
-                <span onclick="resetSearch()"
-                    style="position: absolute; right: 65px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #dc3545;">
-                    <i class="fas fa-times"></i>
-                </span>
-                @endif
-                <button type="submit" class="btn btn-primary position-absolute" style="right: 0; top: 0; bottom: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                    <i class="fas fa-search"></i>
-                </button>
+                <button type="submit" class="btn btn-primary shadow-sm">Cari</button>
             </form>
         </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -142,10 +135,11 @@
 @endif
 
 <script>
-    function resetSearch() {
-        document.getElementById('searchInput').value = '';
-        document.getElementById('searchForm').submit();
-    }
+    document.getElementById('searchInput').addEventListener('input', function () {
+        if (this.value === '') {
+            document.getElementById('searchForm').submit();
+        }
+    });
 </script>
 
 @endpush
