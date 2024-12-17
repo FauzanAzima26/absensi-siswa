@@ -17,26 +17,30 @@
 
     <div class="container">
         <div class="row">
-        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                                class="img-fluid" alt="Sample image"
-                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;">
-                        </div>
-            <div class="col-lg-6 mt-5">
-                <div class="form-container mt-5">
-                    <div class="text-center mb-4 mt-5">
-                        <h1 class="mb-0" style="font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-                            <span class="text-primary">Si</span><span class="text-dark fw-bold">Absensi</span>
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image"
+                    style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;">
+            </div>
+            <div class="col-lg-6 mb-5">
+                <div class="form-container mt-5" style="box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.1);">
+
+                    <div class="text-center mb-4 mt-3">
+                        <h1 class="mb-2" style="font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+                            <span class="text-primary" style="font-weight: bold;">Si</span><span
+                                class="text-dark fw-bold">Absensi</span>
                         </h1>
-                        <h5 class="mb-1 text-muted" style="font-size: 16px; margin-bottom: 5px;">Login</h5>
+                        <h5 class="mb-5 text-muted" style="font-size: 16px; margin-bottom: 5px;">Silahkan login ke akun
+                            anda untuk melanjutkan.</h5>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div>
                             <label for="email" class="form-label">{{ __('Email') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="username" autofocus>
+                            <input id="email" type="email"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                value="{{ old('email') }}" required autocomplete="username" autofocus>
                             @error('email')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -51,31 +55,30 @@
                             @enderror
                         </div>
                         @if (Route::has('password.request'))
-                            <a class="d-block mt-2 text-right text-secondary" href="{{ route('password.request') }}">
-                                Forgot your password?
+                            <a class="d-block mt-3 text-right text-secondary" href="{{ route('password.request') }}">
+                                Lupa kata sandi Anda?
                             </a>
                         @endif
 
-                        <div class="d-flex justify-content-end mt-4">
+                        <div class="d-flex justify-content-end mt-4 mb-4">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
                     </form>
 
                 </div>
-
             </div>
         </div>
     </div>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
         integrity="sha384-CZwr4zVuM9vMpcJCCGjzBCDVPtLarLkZMg/yD2j2MR5J1Y4U3QCzqYwTCtJlSGI/" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-+0n0xVW2eSR5Lqk5KA7w5fjMouJwMmwZym0kqjv0r6h7Z1KS7xfovrFNYuw3hwpH" crossorigin="anonymous">
-        </script>
+    </script>
 </body>
 
 </html>

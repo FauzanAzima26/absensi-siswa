@@ -3,8 +3,9 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="#" class="logo text-decoration-none">
-                <h1 class="mb-0">
-                    <span class="text-primary">Si</span><span class="text-light fw-bold">Absensi</span>
+                <h1 class="mb-0" style="font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+                    <span class="text-primary" style="font-weight: bold;">Si</span><span
+                        class="text-light fw-bold">Absensi</span>
                 </h1>
             </a>
             <div class="nav-toggle">
@@ -26,7 +27,9 @@
             <ul class="nav nav-secondary">
                 @auth
                     <li class="nav-item {{ request()->routeIs('panel.dashboard.*') ? 'active show' : '' }}">
-                        <a data-bs-toggle="collapse" href="#dashboard" class="{{ request()->routeIs('panel.dashboard.*') ? '' : 'collapsed' }}" aria-expanded="{{ request()->routeIs('panel.dashboard.*') ? 'true' : 'false' }}">
+                        <a data-bs-toggle="collapse" href="#dashboard"
+                            class="{{ request()->routeIs('panel.dashboard.*') ? '' : 'collapsed' }}"
+                            aria-expanded="{{ request()->routeIs('panel.dashboard.*') ? 'true' : 'false' }}">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                             <span class="caret"></span>
