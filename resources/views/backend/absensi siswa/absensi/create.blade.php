@@ -8,9 +8,15 @@
             <h3 class="fw-bold mb-3">Absensi Siswa</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
+                    <a href="{{ route('absensi.index') }}">
                         <i class="icon-home"></i>
                     </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('absensi.index') }}">Data Absensi</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -22,9 +28,9 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary">
-                        <div class="card-title text-white">Form Absensi Siswa</div>
+                <div class="card shadow-sm rounded">
+                    <div class="card-header bg-primary rounded-top-3">
+                        <div class="card-title text-white text-center font-weight-bold">Form Absensi Siswa</div>
                     </div>
                     <form action="{{ route('absensi.store') }}" method="POST">
                         @csrf
@@ -33,7 +39,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="kelas_id">Nama Kelas</label>
-                                        <select class="form-control" id="kelas_id" name="kelas_id" required>
+                                        <select class="form-control rounded" id="kelas_id" name="kelas_id" required>
                                             <option value="" disabled selected>Pilih Kelas</option>
                                             @foreach ($kelas as $k)
                                                 <option value="{{ $k->id }}">{{ $k->name_kelas }}</option>
@@ -44,20 +50,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="tanggal">Tanggal Absensi</label>
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                                        <input type="date" class="form-control rounded" id="tanggal" name="tanggal"
+                                            required>
                                     </div>
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped rounded">
                                     <thead class="bg-light">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Nama Siswa</th>
                                             <th>Status Absensi</th>
                                             <th>Keterangan</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="students-table-body">
+                                    <tbody id="students-table-body" class="text-center">
                                         <!-- Data siswa akan dimasukkan di sini -->
                                     </tbody>
                                 </table>
@@ -69,10 +76,10 @@
                             </div>
                         </div>
                         <div class="card-action text-end">
-                            <button class="btn btn-success" type="submit">
+                            <button class="btn btn-success rounded" type="submit">
                                 <i class="fas fa-check"></i> Submit
                             </button>
-                            <a href="{{ route('absensi.index') }}" class="btn btn-danger">
+                            <a href="{{ route('absensi.index') }}" class="btn btn-danger rounded">
                                 <i class="fas fa-times"></i> Cancel
                             </a>
                         </div>
@@ -80,6 +87,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 
     <script>

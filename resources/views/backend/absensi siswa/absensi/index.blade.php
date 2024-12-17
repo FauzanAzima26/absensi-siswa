@@ -14,7 +14,7 @@
             <h3 class="fw-bold mb-3">Absensi Siswa</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
+                    <a href="{{ route('absensi.index') }}">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -23,9 +23,6 @@
                 </li>
                 <li class="nav-item">
                     <a href="#">Data Absensi</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
                 </li>
             </ul>
         </div>
