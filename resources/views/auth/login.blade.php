@@ -59,12 +59,6 @@
                         <div class="d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
-                        <br>
-                        <p class="text-center mt-2 mb-5"><i>Ingin mendaftar?</i>
-                            <a href="">Hubungi admin.</a>
-                        </p>
-
-
                     </form>
 
                 </div>
